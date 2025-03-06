@@ -12,19 +12,35 @@ mkdir "$project_name" && cd "$project_name"
 read -p "Soll ein Git-Repository initialisiert werden? (y/n): " init_git
 if [ "$init_git" == "y" ]; then
     git init
+    git commit --allow-empty -m "Initial commit"
     echo "✅ Git-Repository initialisiert."
 fi
 
-# 4. Node.js Version prüfen & setzen, falls `nvm` vorhanden ist
+# 4. Stelle sicher, dass nvm installiert ist
 if command -v nvm &> /dev/null; then
-    nvm install 18 && nvm use 18
-    echo "✅ Node.js 18 wurde mit nvm gesetzt."
+    # Prüfe verfügbare LTS-Versionen
+    echo "🔍 Prüfe verfügbare LTS-Versionen..."
+    LTS_VERSION=$(nvm ls-remote --lts | tail -1 | awk '{print $1}')
+
+    # Falls keine LTS-Version gefunden wurde, Standardwert setzen (20.x)
+    if [ -z "$LTS_VERSION" ]; then
+        LTS_VERSION="20"
+    fi
+
+    echo "📥 Installiere stabile Node.js LTS-Version: $LTS_VERSION"
+    nvm install $LTS_VERSION
+    nvm use $LTS_VERSION
+    echo "✅ Node.js Version gesetzt: $(node -v)"
+else
+    echo "⚠️ NVM nicht gefunden. Falls du eine alte Node.js-Version hast, solltest du manuell auf LTS downgraden."
 fi
 
 # 5. Frontend-Ordner erstellen und initialisieren
 mkdir frontend && cd frontend
 npm create vite@latest . -- --template react-ts
 npm install
+npm rebuild  # 🔥 Behebt "could not determine executable to run"
+
 npm install react-router-dom zustand tailwindcss postcss autoprefixer eslint prettier eslint-config-prettier eslint-plugin-react-hooks eslint-plugin-jsx-a11y @typescript-eslint/eslint-plugin @typescript-eslint/parser
 npx tailwindcss init -p
 
@@ -50,8 +66,6 @@ npm install express cors dotenv jsonwebtoken bcrypt nodemon helmet express-rate-
 
 # TypeScript installieren
 npm install --save-dev typescript @types/node @types/express ts-node
-
-# TypeScript Config erstellen
 npx tsc --init
 
 echo "✅ Backend mit Express, TypeScript, Sicherheitsmaßnahmen & ESLint eingerichtet."
@@ -86,15 +100,25 @@ PORT=5000
 JWT_SECRET=supergeheimespasswort
 EOL
 
+cd ..
+
 # 7. Husky für Git-Hooks hinzufügen
 if [ "$init_git" == "y" ]; then
-    npx husky-init && npm install
-    npx husky add .husky/pre-commit "npm run lint"
-    npx husky add .husky/pre-push "npm test"
+    echo "✅ Stelle sicher, dass sich `.git` im richtigen Verzeichnis befindet."
+    npm install husky --save-dev
+    npx husky install
+    git add .husky
+
+    echo "#!/bin/sh" > .husky/pre-commit
+    echo "npm run lint" >> .husky/pre-commit
+    chmod +x .husky/pre-commit
+
+    echo "#!/bin/sh" > .husky/pre-push
+    echo "npm test" >> .husky/pre-push
+    chmod +x .husky/pre-push
+
     echo "✅ Husky mit Pre-Commit- und Pre-Push-Hooks eingerichtet."
 fi
-
-cd ..
 
 # 8. .gitignore für Node.js-Projekte erstellen
 cat <<EOL > .gitignore
@@ -147,30 +171,17 @@ EOL
     echo "✅ GitHub Actions für CI/CD eingerichtet."
 fi
 
-# 10. Start-Skript für einfaches Starten von Frontend & Backend (Plattform-sicher)
-cat <<EOL > start.sh
-#!/bin/bash
-
-echo "🚀 Starte das Projekt..."
-
-# Öffnet automatisch das Frontend im Browser
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
-  xdg-open http://localhost:5173
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-  start http://localhost:5173
+# 10. Optional: Update auf die neueste Node.js-Version anbieten
+read -p "Möchtest du am Ende auf die neueste Node.js-Version aktualisieren? (y/n): " update_node
+if [ "$update_node" == "y" ]; then
+    LATEST_VERSION=$(nvm ls-remote | tail -1 | awk '{print $1}')
+    echo "📥 Aktualisiere auf die neueste Node.js-Version: $LATEST_VERSION"
+    nvm install $LATEST_VERSION
+    nvm use $LATEST_VERSION
+    echo "✅ Node.js aktualisiert auf: $(node -v)"
+else
+    echo "ℹ️ Bleibe bei der stabilen LTS-Version: $(node -v)"
 fi
-
-# Starte Frontend und Backend in separaten Terminals
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
-  gnome-terminal -- bash -c "cd frontend && npm run dev; exec bash"
-  gnome-terminal -- bash -c "cd backend && npm run dev; exec bash"
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-  cmd.exe /c start "Frontend" bash -c "cd frontend && npm run dev"
-  cmd.exe /c start "Backend" bash -c "cd backend && npm run dev"
-fi
-EOL
-chmod +x start.sh
-echo "✅ Start-Skript erstellt."
 
 # 11. Sicherstellen, dass die neuesten Pakete installiert sind
 npm outdated && npm update

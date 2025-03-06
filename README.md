@@ -107,6 +107,7 @@ During setup, you will be asked for the project name and whether to initialize G
 
 cd my-project
 ./start.sh
+
 ✅ Frontend & Backend will start automatically
 ✅ The browser opens with React
 
