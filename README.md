@@ -105,7 +105,7 @@ fullstack-ts-setup.sh
 Während des Setups wirst du nach dem Projektnamen und einer Git-Initialisierung gefragt.
 
 
-🚀 Usage Instructions (English 🇬🇧)
+# 🚀 Usage Instructions (English 🇬🇧)
 
 🔹 1️⃣ Download the script
 Download the desired script or clone the repository:
