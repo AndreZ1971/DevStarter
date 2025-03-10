@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Starte minimales Fullstack-Setup mit Vite, React, Node.js, Tailwind CSS & GitHub-Repo"
+echo "🚀 Starte minimales Fullstack-Setup mit Vite, React, Node.js, Tailwind CSS & GitHub-Repo (JavaScript-Version)"
 
 # 1. Projektname abfragen
 read -p "Wie soll dein Projekt heißen? " project_name
@@ -33,31 +33,31 @@ EOL
     echo "✅ GitHub-Repository '$github_repo' erstellt & erster Commit gepusht!"
 fi
 
-# 4. Frontend-Ordner mit Vite & React + TypeScript einrichten
+# 4. Frontend-Ordner mit Vite & React einrichten
 mkdir frontend && cd frontend
-npm create vite@latest . -- --template react-ts
+npm create vite@latest . -- --template react
 npm install
 
-# Tailwind CSS (nur stabile Version) installieren & konfigurieren
-npm install -D tailwindcss postcss autoprefixer
+# Tailwind CSS (neueste stabile Version) installieren & konfigurieren
+npm install -D tailwindcss@latest postcss autoprefixer
 npx tailwindcss init -p
 
 # Tailwind Config anpassen
 cat <<EOL > tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx}"],
   theme: { extend: {} },
   plugins: [],
 };
 EOL
 
 # ESLint & Prettier für Frontend installieren
-npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-react-hooks
 
 # ESLint & Prettier Konfiguration erstellen
 cat <<EOL > .eslintrc.json
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:@typescript-eslint/recommended"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "env": { "browser": true, "es2021": true }
 }
 EOL
@@ -73,14 +73,13 @@ EOL
 echo "✅ Frontend eingerichtet."
 cd ..
 
-# 5. Backend-Ordner mit Express + TypeScript einrichten
+# 5. Backend-Ordner mit Express einrichten
 mkdir backend && cd backend
 npm init -y
-npm install express cors dotenv
-npm install --save-dev typescript @types/node @types/express ts-node nodemon eslint prettier eslint-config-prettier eslint-plugin-node eslint-plugin-security
+npm install express cors dotenv nodemon
 
-# TypeScript konfigurieren
-npx tsc --init
+# ESLint & Prettier für Backend installieren
+npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-node eslint-plugin-security
 
 # ESLint & Prettier für Backend konfigurieren
 cat <<EOL > .eslintrc.json
@@ -98,12 +97,11 @@ cat <<EOL > .prettierrc.json
 }
 EOL
 
-# Backend-Hauptdatei erstellen
-mkdir -p backend
-cat <<EOL > server.ts
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+# Backend-Hauptdatei erstellen (server.js)
+cat <<EOL > server.js
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
 dotenv.config();
 const app = express();
