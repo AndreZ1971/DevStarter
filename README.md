@@ -13,10 +13,15 @@ Diese Repository enthält **automatische Setup-Skripte** für Fullstack-Projekte
 
 Diese Skripte automatisieren das Setup einer **modernen Entwicklungsumgebung** für Fullstack-Projekte mit:
 ✅ **Frontend:** React mit Vite, Tailwind CSS, Zustand, React Router  
+
 ✅ **Backend:** Express.js mit Sicherheitsfeatures (CORS, dotenv, Helmet, Rate-Limiting)  
+
 ✅ **Entwicklertools:** ESLint, Prettier, Husky, GitHub Actions für CI/CD  
-✅ **GitHub-Repository-Option:** Optional kann direkt ein Repo erstellt und gepusht werden  
+
+✅ **GitHub-Repository-Option:** Optional kann direkt ein Repo erstellt und gepusht werden 
+
 ✅ **Update-Option:** Am Ende kann entschieden werden, ob Abhängigkeiten aktualisiert werden
+
 ✅ **Sofort einsatzbereit:** Alles wird installiert und vorkonfiguriert 
 ---
 
