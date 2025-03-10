@@ -5,7 +5,8 @@ Diese Repository enthält **automatische Setup-Skripte** für Fullstack-Projekte
 ## 📌 Enthaltene Skripte:
 - **[`fullstack-js-setup.sh`](#-fullstack-js-setupsh)** → Fullstack-Setup mit JavaScript
 - **[`fullstack-ts-setup.sh`](#-fullstack-ts-setupsh)** → Fullstack-Setup mit TypeScript
-
+- **[`fullstack-js-klein-setup.sh`](#-fullstack-js-setupsh)** → Fullstack-Setup mit JavaScript
+- **[`fullstack-ts-klein-setup.sh`](#-fullstack-ts-setupsh)** → Fullstack-Setup mit TypeScript
 ---
 
 ## 📢 Was diese Skripte machen
@@ -14,8 +15,9 @@ Diese Skripte automatisieren das Setup einer **modernen Entwicklungsumgebung** f
 ✅ **Frontend:** React mit Vite, Tailwind CSS, Zustand, React Router  
 ✅ **Backend:** Express.js mit Sicherheitsfeatures (CORS, dotenv, Helmet, Rate-Limiting)  
 ✅ **Entwicklertools:** ESLint, Prettier, Husky, GitHub Actions für CI/CD  
-✅ **Sofort einsatzbereit:** Alles wird installiert und vorkonfiguriert  
-
+✅ **GitHub-Repository-Option:** Optional kann direkt ein Repo erstellt und gepusht werden  
+✅ **Update-Option:** Am Ende kann entschieden werden, ob Abhängigkeiten aktualisiert werden
+✅ **Sofort einsatzbereit:** Alles wird installiert und vorkonfiguriert 
 ---
 
 ## 📌 `fullstack-js-setup.sh`
@@ -46,6 +48,33 @@ Dieses Skript richtet eine **TypeScript-basierte Entwicklungsumgebung** ein.
 
 ---
 
+## 📌 `fullstack-klein-js-setup.sh`
+
+### 📜 **Beschreibung**
+Dieses Skript richtet eine **JavaScript-basierte Entwicklungsumgebung** ein.
+
+### 📥 **Installierte Technologien**
+|     Bereich     |                        Technologie                                   |
+|-----------------|----------------------------------------------------------------------|
+| **Frontend**    | React, Vite, Tailwind CSS 4.0                                        |
+| **Backend**     | Express.js, CORS, dotenv                                             |
+| **Entwicklung** | ESLint, Prettier für Code-Qualität                                   |
+
+---
+
+## 📌 `fullstack-ts-klein-setup.sh`
+
+### 📜 **Beschreibung**
+Dieses Skript richtet eine **TypeScript-basierte Entwicklungsumgebung** ein.
+
+### 📥 **Installierte Technologien**
+|     Bereich     |                          Technologie                                 |
+|-----------------|----------------------------------------------------------------------|
+| **Frontend**    | React, Vite mit TypeScript, Tailwind CSS 4.0                         |
+| **Backend**     | Express.js mit TypeScript, CORS, dotenv                              |
+| **Entwicklung** | ESLint, Prettier für Code-Qualität                                   |
+
+---
 # 🚀 **Bedienungsanleitung** (Deutsch 🇩🇪)
 
 🔹 1️⃣ Skript herunterladen
@@ -102,7 +131,10 @@ During setup, you will be asked for the project name and whether to initialize G
 ## **📌 Was ist enthalten?**
 ✅ **Zweisprachig Anleitung (Deutsch & Englisch)**  
 ✅ **Erklärung der Skripte & Technologien**  
-✅ **Detaillierte Schritt-für-Schritt-Anleitung**  
+✅ **Automatische Start-Skripte entfernt**  
+✅ **Klarere Erklärung, was die Skripte tun**  
+✅ **GitHub-Repo-Erstellung & Update-Option hinzugefügt**  
+✅ **Einheitliche Formatierung für bessere Lesbarkeit** 
 
 
 Falls du noch Änderungen möchtest, sag Bescheid! 😊🚀
