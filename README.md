@@ -12,6 +12,7 @@ Diese Repository enthält **automatische Setup-Skripte** für Fullstack-Projekte
 ## 📢 Was diese Skripte machen
 
 Diese Skripte automatisieren das Setup einer **modernen Entwicklungsumgebung** für Fullstack-Projekte mit:
+
 ✅ **Frontend:** React mit Vite, Tailwind CSS, Zustand, React Router  
 
 ✅ **Backend:** Express.js mit Sicherheitsfeatures (CORS, dotenv, Helmet, Rate-Limiting)  
