@@ -69,15 +69,6 @@ Für TypeScript-Setup:
 fullstack-ts-setup.sh
 Während des Setups wirst du nach dem Projektnamen und einer Git-Initialisierung gefragt.
 
-🔹 4️⃣ Projekt starten
-
-cd mein-projekt
-./start.sh
-
-
-✅ Frontend & Backend starten automatisch
-✅ Der Browser öffnet sich mit React
-
 
 🚀 Usage Instructions (English 🇬🇧)
 
@@ -102,15 +93,6 @@ For TypeScript setup:
 
 fullstack-ts-setup.sh
 During setup, you will be asked for the project name and whether to initialize Git.
-
-🔹 4️⃣ Start the project
-
-cd my-project
-./start.sh
-
-✅ Frontend & Backend will start automatically
-✅ The browser opens with React
-
 
 🔧 Plattform-Unterstützung
 

@@ -140,32 +140,7 @@ EOL
     echo "✅ GitHub Actions für CI/CD eingerichtet."
 fi
 
-# 10. Start-Skript für einfaches Starten von Frontend & Backend (Plattform-sicher)
-cat <<EOL > start.sh
-#!/bin/bash
-
-echo "🚀 Starte das Projekt..."
-
-# Öffnet automatisch das Frontend im Browser
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
-  xdg-open http://localhost:5173
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-  start http://localhost:5173
-fi
-
-# Starte Frontend und Backend in separaten Terminals
-if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
-  gnome-terminal -- bash -c "cd frontend && npm run dev; exec bash"
-  gnome-terminal -- bash -c "cd backend && npm start; exec bash"
-elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-  cmd.exe /c start "Frontend" bash -c "cd frontend && npm run dev"
-  cmd.exe /c start "Backend" bash -c "cd backend && npm start"
-fi
-EOL
-chmod +x start.sh
-echo "✅ Start-Skript erstellt."
-
-# 11. Sicherstellen, dass die neuesten Pakete installiert sind
+# 10. Sicherstellen, dass die neuesten Pakete installiert sind
 npm outdated && npm update
 echo "✅ Alle Pakete sind auf dem neuesten Stand."
 
